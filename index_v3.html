@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enabled Career Navigation Datathon | Participant Packet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e6;
+            background: #0a0e27;
+            overflow-x: hidden;
+            cursor: default;
+        }
+        
+        * {
+            cursor: inherit;
+        }
+        
+        a, button, .collapsible-header, .use-case-card, .partner-logo-card, .showcase-card {
+            cursor: pointer;
+        }
+        
+        a:hover, button:hover {
+            cursor: pointer;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 70%),
+                linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #16213e 100%);
+            opacity: 1;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 212, 255, 0.05) 2px,
+                rgba(0, 212, 255, 0.05) 4px
+            );
+            animation: gridMove 20s linear infinite;
+        }
+        
+        .animated-bg::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 40%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(10, 14, 39, 0.98);
+            backdrop-filter: blur(20px) saturate(180%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(102, 126, 234, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.25);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            position: relative;
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid transparent;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #667eea);
+            transition: all 0.2s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(102, 126, 234, 0.15));
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 
+                0 4px 12px rgba(0, 212, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        nav a:hover::after {
+            width: 70%;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: 
+                radial-gradient(ellipse at top left, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #16213e 100%);
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.5), 
+                rgba(102, 126, 234, 0.5), 
+                transparent
+            );
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 30%, #667eea 60%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.2));
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .hero .hosts {
+            font-size: 0.95rem;
+            margin-top: 1.25rem;
+            opacity: 0.75;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+        }
+
+        .hero .event-info {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero .info-item {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(102, 126, 234, 0.15) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .hero .info-item:hover {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.2) 0%, 
+                rgba(102, 126, 234, 0.25) 100%);
+            box-shadow: 
+                0 8px 24px rgba(102, 126, 234, 0.35),
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .hero .info-label {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .hero .info-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        /* Section Styling */
+        .section {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.04) 0%, 
+                rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(102, 126, 234, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(20px) saturate(180%);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.4), 
+                rgba(102, 126, 234, 0.4), 
+                transparent
+            );
+            opacity: 0.5;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.6), 
+                rgba(102, 126, 234, 0.6), 
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .section:hover {
+            box-shadow: 
+                0 16px 48px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(102, 126, 234, 0.5),
+                0 0 30px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            border-color: rgba(102, 126, 234, 0.6);
+        }
+        
+        .section:hover::after {
+            opacity: 1;
+        }
+        
+        .section:hover::before {
+            opacity: 1;
+        }
+
+        .section h2 {
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 30%, #667eea 60%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            position: relative;
+            filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.2));
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #667eea, #9333ea);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        }
+
+        .section h3 {
+            color: #d0d1d8;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .section h4 {
+            color: #d8d9e0;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 0.85rem;
+            font-size: 1rem;
+            color: #e0e0e6;
+            line-height: 1.7;
+        }
+
+        .section ul, .section ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            color: #e0e0e6;
+            line-height: 1.6;
+        }
+
+        .section li {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #e0e0e6;
+        }
+
+        /* Use Case Cards */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .use-case-card {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.08) 0%, 
+                rgba(102, 126, 234, 0.12) 50%,
+                rgba(147, 51, 234, 0.08) 100%);
+            border-left: 4px solid;
+            border-image: linear-gradient(180deg, #00d4ff, #667eea, #9333ea) 1;
+            padding: 2rem;
+            border-radius: 16px;
+            transition: box-shadow 0.2s ease, border-left-width 0.2s ease, transform 0.2s ease;
+            box-shadow: 
+                0 6px 24px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px) saturate(150%);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .use-case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.1), 
+                transparent
+            );
+            transition: left 0.3s ease;
+        }
+        
+        .use-case-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(0, 212, 255, 0.15) 0%, 
+                transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .use-case-card p {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #e0e0e6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .use-case-card ul {
+            margin-top: 0.7rem;
+            margin-bottom: 0.4rem;
+            position: relative;
+            z-index: 1;
+            color: #e0e0e6;
+        }
+        
+        .use-case-card li {
+            color: #e0e0e6;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .use-case-card:hover {
+            box-shadow: 
+                0 12px 40px rgba(102, 126, 234, 0.4),
+                0 0 30px rgba(0, 212, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            border-left-width: 6px;
+        }
+        
+        .use-case-card:hover::before {
+            left: 100%;
+        }
+        
+        .use-case-card:hover::after {
+            opacity: 1;
+        }
+
+        .use-case-card h4 {
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 50%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .use-case-card:hover h4 {
+            filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.4));
+        }
+
+        /* Rubric Table */
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rubric-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .rubric-table td {
+            padding: 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            color: #e0e0e6;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .rubric-table tr:nth-child(even) {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .rubric-table tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .score-boxes {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .score-box {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Partners Grid */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .partner-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-3px);
+            background: #e9ecef;
+        }
+
+        /* Agenda Table */
+        .agenda-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .agenda-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .agenda-table td {
+            padding: 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            vertical-align: top;
+            color: #e0e0e6;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .agenda-table tr:nth-child(even) {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .agenda-table tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .agenda-table td strong {
+            color: #d0d1d8;
+        }
+
+        .time-cell {
+            font-weight: 600;
+            color: #00d4ff;
+            white-space: nowrap;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(102, 126, 234, 0.15) 50%,
+                rgba(147, 51, 234, 0.1) 100%);
+            border-left: 5px solid;
+            border-image: linear-gradient(180deg, #00d4ff, #667eea, #9333ea) 1;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            line-height: 1.7;
+            box-shadow: 
+                0 6px 24px rgba(102, 126, 234, 0.2),
+                0 0 0 1px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px) saturate(150%);
+            transition: box-shadow 0.2s ease, border-left-width 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.6), 
+                rgba(102, 126, 234, 0.6), 
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .highlight-box:hover {
+            transform: translateX(4px);
+            box-shadow: 
+                0 8px 32px rgba(102, 126, 234, 0.25),
+                0 0 20px rgba(0, 212, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .highlight-box:hover::before {
+            opacity: 1;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0.65rem;
+            position: relative;
+            z-index: 1;
+            color: #e0e0e6;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .highlight-box ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            color: #e0e0e6;
+        }
+        
+        .highlight-box li {
+            color: #e0e0e6;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .highlight-box strong {
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #667eea);
+            transition: width 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: none;
+            filter: drop-shadow(0 2px 6px rgba(0, 212, 255, 0.5));
+        }
+        
+        footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2.5rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero .event-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .rubric-table, .agenda-table {
+                font-size: 0.85rem;
+            }
+
+            .rubric-table th, .rubric-table td,
+            .agenda-table th, .agenda-table td {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Data Section Special */
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-stat {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.15) 0%, 
+                rgba(102, 126, 234, 0.2) 50%,
+                rgba(147, 51, 234, 0.15) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        
+        .data-stat:hover {
+            box-shadow: 
+                0 8px 28px rgba(102, 126, 234, 0.4),
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .data-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .data-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.95;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* Code Styling */
+        code {
+            background: rgba(0, 212, 255, 0.15);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9em;
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        pre {
+            background: rgba(10, 14, 39, 0.8);
+            color: #e0e0e6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        pre code {
+            background: transparent;
+            color: #e0e0e6;
+            padding: 0;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-header {
+            cursor: pointer;
+            padding: 1.4rem 1.8rem;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(102, 126, 234, 0.15) 50%,
+                rgba(147, 51, 234, 0.1) 100%);
+            border: 1.5px solid rgba(102, 126, 234, 0.35);
+            border-radius: 14px;
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            user-select: none;
+            font-size: 1.15rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collapsible-header span {
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 30%, #667eea 60%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .collapsible-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.2), 
+                transparent
+            );
+            transition: left 0.3s ease;
+        }
+        
+        .collapsible-header::after {
+            content: '▼';
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.8rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: 1rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 3px rgba(0, 212, 255, 0.4));
+        }
+
+        .collapsible-header:hover::before {
+            left: 100%;
+        }
+
+        .collapsible-header:hover {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.18) 0%, 
+                rgba(102, 126, 234, 0.22) 50%,
+                rgba(147, 51, 234, 0.18) 100%);
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 
+                0 8px 24px rgba(102, 126, 234, 0.35),
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .collapsible-header:hover::after {
+            transform: scale(1.2);
+            filter: drop-shadow(0 2px 6px rgba(0, 212, 255, 0.6));
+        }
+
+        .collapsible-header.active {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.12) 0%, 
+                rgba(102, 126, 234, 0.18) 50%,
+                rgba(147, 51, 234, 0.12) 100%);
+            border-color: rgba(102, 126, 234, 0.5);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            box-shadow: 
+                0 4px 16px rgba(102, 126, 234, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .collapsible-header.active::after {
+            transform: rotate(180deg) scale(1.2);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.25s ease, opacity 0.2s ease;
+            padding: 0 1.5rem;
+            opacity: 0;
+        }
+
+        .collapsible-content.active {
+            max-height: 5000px;
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, 
+                rgba(0, 212, 255, 0.05) 0%, 
+                rgba(102, 126, 234, 0.08) 50%,
+                rgba(147, 51, 234, 0.05) 100%);
+            border: 1.5px solid rgba(102, 126, 234, 0.25);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 1.5rem;
+            opacity: 1;
+            box-shadow: inset 0 2px 8px rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .collapsible-content p {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+            color: #e0e0e6;
+            font-size: 1rem;
+        }
+        
+        .collapsible-content li {
+            color: #e0e0e6;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .collapsible-content ul, .collapsible-content ol {
+            color: #e0e0e6;
+        }
+
+        /* Project Showcase */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-card {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.05) 0%, 
+                rgba(102, 126, 234, 0.08) 50%,
+                rgba(147, 51, 234, 0.05) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .showcase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.15), 
+                transparent
+            );
+            transition: left 0.3s ease;
+        }
+        
+        .showcase-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 212, 255, 0.8), 
+                rgba(102, 126, 234, 0.8), 
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .showcase-card:hover {
+            box-shadow: 
+                0 12px 40px rgba(102, 126, 234, 0.3),
+                0 0 20px rgba(0, 212, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+        
+        .showcase-card:hover::before {
+            left: 100%;
+        }
+        
+        .showcase-card:hover::after {
+            opacity: 1;
+        }
+
+        .showcase-card h4 {
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 50%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .showcase-card:hover h4 {
+            filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.4));
+        }
+        
+        .showcase-card p {
+            color: #e0e0e6;
+            line-height: 1.7;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-card .team-name {
+            font-weight: 600;
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-card .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+        
+        .showcase-card .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .showcase-card .project-link:hover {
+            background: linear-gradient(135deg, #00ffff 0%, #00d4ff 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.5));
+            transform: translateX(4px);
+        }
+        
+        .showcase-card .project-link:hover::before {
+            opacity: 1;
+        }
+
+        .showcase-placeholder {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(102, 126, 234, 0.05);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            color: #e0e0e6;
+            font-style: italic;
+        }
+
+        /* Partner Logos */
+        .partners-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.75rem;
+            margin-top: 2.5rem;
+            align-items: stretch;
+        }
+
+        .partner-logo-card {
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.1) 0%, 
+                rgba(102, 126, 234, 0.15) 50%,
+                rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.35);
+            border-radius: 16px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px) saturate(150%);
+            box-shadow: 
+                0 6px 24px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        
+        .partner-logo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.15) 0%, 
+                rgba(102, 126, 234, 0.2) 50%,
+                rgba(147, 51, 234, 0.15) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .partner-logo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transition: left 0.3s ease;
+        }
+
+        .partner-logo-card:hover {
+            box-shadow: 
+                0 12px 40px rgba(102, 126, 234, 0.4), 
+                0 0 0 1px rgba(102, 126, 234, 0.5),
+                0 0 30px rgba(0, 212, 255, 0.2);
+            border-color: rgba(102, 126, 234, 0.7);
+        }
+        
+        .partner-logo-card:hover::before {
+            opacity: 1;
+        }
+        
+        .partner-logo-card:hover::after {
+            left: 100%;
+        }
+
+        .partner-logo-card img {
+            max-width: 100%;
+            max-height: 80px;
+            min-height: 40px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .partner-logo-card:hover img,
+        .partner-logo-card:hover svg {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .partner-logo-card svg {
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+        
+        .partner-logo-card:hover svg {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .partner-logo-card:hover svg rect {
+            fill: rgba(255, 255, 255, 0.1);
+        }
+
+        .partner-logo-card .logo-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            color: #667eea;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-logo-card .logo-placeholder {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-logo-card .partner-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 50%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            word-wrap: break-word;
+            text-align: center;
+            padding: 2rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            line-height: 1.5;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.01em;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+        }
+        
+        .partner-logo-card:hover .partner-name {
+            background: linear-gradient(135deg, #00ffff 0%, #00d4ff 30%, #667eea 60%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 4px 12px rgba(0, 212, 255, 0.5));
+            letter-spacing: 0.02em;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="#challenge">Challenge</a></li>
+            <li><a href="#data">Data</a></li>
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#participants">Participants</a></li>
+            <li><a href="#showcase">Projects</a></li>
+            <li><a href="#submission">Submission</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI-Enabled Career Navigation Datathon</h1>
+            <p class="subtitle">American Opportunity Index Hackathon</p>
+            <p class="hosts">Hosted by Gates Foundation & Schultz Family Foundation</p>
+            <div class="event-info">
+                <div class="info-item">
+                    <div class="info-label">Dates</div>
+                    <div class="info-value">January 28-29</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Location</div>
+                    <div class="info-value">Seattle, WA</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Welcome and Overview -->
+    <section id="welcome" class="section container">
+        <h2>Welcome and Overview</h2>
+        <p><strong>Welcome!</strong> Thank you for joining the AI-Enabled Career Navigation Datathon, hosted by the Gates Foundation and the Schultz Family Foundation.</p>
+        
+        <p>We're gathering at a pivotal moment for career navigation. AI is reshaping the workforce—changing skill requirements, career trajectories, and entry-level opportunity. As this accelerates, our tools must evolve beyond role and wage navigation to show where opportunity actually develops.</p>
+
+        <p>This datathon brings leaders together to build, test, and experiment with new career navigation approaches. Using the American Opportunity Index as our data foundation, we'll prototype next-generation tools that help young adults and workers make more informed, equitable decisions.</p>
+
+        <p>Our goal: transform data into actionable infrastructure. Together, we'll advance AI-enabled navigation tools grounded in real mobility outcomes, shaped by practitioner insight, and informed by young people's lived experience.</p>
+
+        <p>Over two days, you'll collaborate with peers, youth participants, and technical advisors to explore how data, technology, and design improve long-term outcomes. We're excited to build alongside you.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>High-Level Logistics</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="highlight-box">
+            <p><strong>Event Dates:</strong> January 28–29</p>
+            <p><strong>Location:</strong> Gates Foundation Headquarters, 500 Fifth Avenue North, Seattle, WA 98109</p>
+            <p><strong>Participants:</strong> Career navigation organizations, technical advisors, funders, and youth leaders. See section five for full participant list.</p>
+
+            <h4 style="margin-top: 1.5rem;">Event Goals:</h4>
+            <ul style="margin-left: 1.5rem;">
+                <li>Build community and accelerate shared learning across navigation partners</li>
+                <li>Prototype responsible AI career navigation tools using AOI and complementary datasets</li>
+                <li>Model ethical AI practices: explainability, privacy, and bias auditing</li>
+                <li>Center youth voices through embedded participation and evaluation sessions</li>
+                <li>Generate reusable technical components: APIs, prompts, models, and interfaces</li>
+                <li>Establish learning loops to understand how data influences decisions and mobility outcomes</li>
+            </ul>
+
+            <p style="margin-top: 1.5rem;"><strong>API and Data Access:</strong> Hacking participants receive access to the MCP Server with the American Opportunity Index dataset. Technical onboarding and data use agreements are included later in this packet. Questions? Contact hannah@arborimpactadvisors.com or tech@schultzfamilyfoundation.org.</p>
+
+            <p><strong>Agenda Overview:</strong> Day 1 starts at 12:00pm with lunch, networking, orientation, framing, and prototyping. Day 2 starts at 8:30am with tool refinement, youth feedback, and final presentations.</p>
+
+            <p>Additional details—run-of-show, participant roles, youth engagement sessions, and technical resources—are in the following sections.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The Challenge Prompt -->
+    <section id="challenge" class="section container">
+        <h2>The Challenge Prompt</h2>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Purpose and Opportunity</span>
+        </div>
+        <div class="collapsible-content active">
+            <p>Large language models and generative AI are reshaping how learners and workers navigate the labor market. Without transparent, equitable data foundations, these tools risk reinforcing bias and misinformation. The American Opportunity Index (AOI)—covering 1,700 companies, 12 million workers, and 923 O*NET occupation codes—enables AI navigation tools grounded in real mobility outcomes, not unverified internet data. This Gates–Schultz Datathon prototypes next-generation tools that use AOI data responsibly to surface mobility-friendly pathways for young people, especially those in under-resourced communities.</p>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Challenge Prompts & Use Cases</span>
+        </div>
+        <div class="collapsible-content active">
+            <p>Each organization knows its users, contexts, and constraints best. This Datathon isn't about one-size-fits-all solutions—it's about creating compelling, user-centered tools that bring the American Opportunity Index to life. Start with your real users—young people, learners, workers, or advisors—and design AI-enabled experiences that translate data into meaningful, trustworthy, actionable insights. Success comes from clear use cases, thoughtful data integration, and strong narratives showing how your tool improves career navigation and economic mobility. Consider these use cases:</p>
+
+            <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Use Case 1: Mobility Matchmaker</h4>
+                <p>Career mobility is often discussed but rarely operationalized. Job seekers see titles and wages but lack visibility into whether employers or pathways support advancement over time. This use case explores signals—credentials, skills progression, promotion patterns, retention, local labor market dynamics—that characterize "mobility-friendly" pathways. Explore how different mobility definitions shape recommendations and surface promising opportunities not obvious through traditional job search tools.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 2: Explainable Career Paths</h4>
+                <p>Many AI career tools generate recommendations without explaining rationale, limiting trust and agency. This use case examines how LLMs and structured outcomes data can articulate why certain transitions, credentials, or pathways lead to stronger outcomes. Focus on explanation over prediction—explore narrative framing, comparative reasoning, and transparency for different audiences (learners, families, advisors).</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 3: Bias Audit Toolkit</h4>
+                <p>AI systems can unintentionally reproduce inequities when outcomes differ across demographic or geographic groups. This use case focuses on analytical approaches to examine equity in career recommendations. Explore detecting disparities, defining fairness metrics for career navigation, and visualizing differences in access or outcomes. Understand where bias emerges, how to measure it, and what reporting mechanisms support accountability.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 4: Youth-Facing Interface</h4>
+                <p>Career navigation tools often assume high prior knowledge, digital fluency, and institutional familiarity—assumptions that fail for many first-generation or early-career users. This use case explores translating data-driven insights into accessible, supportive guidance. Examine how language, framing, pacing, and representation influence comprehension and trust. Focus on sense-making and user experience, not technical implementation.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 5: Data Gap Discovery Toolkit</h4>
+                <p>Data availability and quality limitations constrain what AI navigation systems can support. This use case invites identifying missing or underdeveloped data that most limit current approaches—informal learning, non-linear pathways, lived experience, long-term mobility outcomes. Explore how gaps affect recommendations and consider strategies for addressing them: data partnerships, new collection methods, or governance models.</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>The Rubric</span>
+        </div>
+        <div class="collapsible-content">
+            <p>Scoring rubric for evaluating final demos/presentations:</p>
+            <p><strong>Scoring scale:</strong> 1 = Limited · 3 = Solid · 5 = Excellent (Use 2 or 4 for in-between performance). Maximum score: 30 points</p>
+
+            <table class="rubric-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Criteria</th>
+                    <th>1 – Limited</th>
+                    <th>3 – Solid</th>
+                    <th>5 – Excellent</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Career Navigation Value</strong></td>
+                    <td>Problem vague; generic job matching</td>
+                    <td>Clear user and career problem</td>
+                    <td>Reframes mobility with actionable pathway insight</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>AOI Data Use & Integrity</strong></td>
+                    <td>AOI unclear, misused, or overstated</td>
+                    <td>AOI used correctly with basic explanation</td>
+                    <td>Nuanced AOI use; assumptions and limits explicit</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Explainability & Trust</strong></td>
+                    <td>Recommendations are a black box</td>
+                    <td>Some explanation of reasoning</td>
+                    <td>Clear, transparent, user-interrogable logic</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Equity & Responsible AI</strong></td>
+                    <td>Equity not considered</td>
+                    <td>Equity risks acknowledged</td>
+                    <td>Equity central; bias examined or audited</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>User-Centered Design & Reuse</strong></td>
+                    <td>Hard to use; tech-first</td>
+                    <td>Generally usable and relevant</td>
+                    <td>Youth-affirming, reusable, pilot-ready</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><strong>Long-term Outcomes</strong></td>
+                    <td>Outputs only; no path to impact</td>
+                    <td>Identifies desired long-term outcomes and basic tracking</td>
+                    <td>Demonstrates clear long-term mobility impact and a plan to measure, learn, and improve over time</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 4: The Data -->
+    <section id="data" class="section container">
+        <h2>The Data</h2>
+        <p><strong>Key Links:</strong> <a href="#" style="color: #667eea;">Data Dictionary</a></p>
+
+        <p>The American Opportunity Index (AOI) dataset provides an outcomes-based view of worker mobility across the largest U.S. employers, assessing companies and company-occupation pairs across 3 dimensions of job quality. Built from longitudinal analysis of 12 million worker career histories, combined with job postings and wage data, covering 1,763 large U.S. employers, 563 occupational clusters, and over 55,000 employer-occupation pairs.</p>
+
+        <div class="data-stats">
+            <div class="data-stat">
+                <div class="data-stat-number">12M</div>
+                <div class="data-stat-label">Worker Career Histories</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">1,763</div>
+                <div class="data-stat-label">Large U.S. Employers</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">563</div>
+                <div class="data-stat-label">Occupational Clusters</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">55,000+</div>
+                <div class="data-stat-label">Employer-Occupation Pairs</div>
+            </div>
+        </div>
+
+        <p>The dataset provides stakeholders insights on employers and jobs that best match their priorities. Job quality isn't uniform: the same employer may offer strong opportunity in some occupations and limited opportunity in others. Assessing at the company-occupation level brings actionability to these variances.</p>
+
+        <p>We evaluate jobs and employers across core outcomes that matter most to workers (wages, stability/retention, promotion/mobility). These metrics combine into three distinct archetypes: <strong>Early Career jobs</strong> are accessible to entry-level workers and lead to promotion and advancement; <strong>Growth jobs</strong> enable upward mobility within and beyond the firm, particularly in organizations that promote from within; <strong>Stability jobs</strong> offer strong pay and long-term retention. Employers and employer-occupation pairs are rated using Platinum (top 20%) and Gold (next 20%) designations, showing both overall performance and role-specific strengths.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Core Metrics & Data Details</span>
+        </div>
+        <div class="collapsible-content">
+        <h3>Core Metrics</h3>
+        <ul>
+            <li><strong>Wages:</strong> Salary and wages for an occupation at a company as measured between 2019 and 2024, normalized to 2024 dollars, based on Glassdoor data.</li>
+            <li><strong>Retention:</strong> Likelihood that a worker remains at the company for at least three years, based on observed job starts between 2017 and 2021.</li>
+            <li><strong>Internal Promotion:</strong> Of workers who started in a given job between 2015 and 2019, this metric measures the share of workers who are in a higher paying role at the same employer within 5 years (i.e., 2020 thru 2024).</li>
+            <li><strong>External Promotion (Advancement Beyond):</strong> Of workers who started in a given job between 2015 and 2019, this metric measures the share of workers who find themselves in a higher paying role at a different employer within 5 years (i.e., 2020 thru 2024).</li>
+            <li><strong>Entry Level:</strong> Share of new hires with fewer than three years of experience, based on observed job starts between 2019 and 2024.</li>
+            <li><strong>Leaders From Within:</strong> Share of top earners who rose into leadership roles internally. This is only metric that is calculated at the company level, as it reflects firm-wide leadership pathways rather than occupation-specific outcomes.</li>
+        </ul>
+
+        <h3>Three Job Quality Archetypes</h3>
+        <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Early Career Jobs</h4>
+                <p>Composite of internal promotion and external promotion, filtered for company-occupation pairs with over 20% of hires at the entry level.</p>
+            </div>
+            <div class="use-case-card">
+                <h4>Stability Jobs</h4>
+                <p>Composite of wages and retention.</p>
+            </div>
+            <div class="use-case-card">
+                <h4>Growth Jobs</h4>
+                <p>Composite of internal promotion and external promotion, filtered for companies with strong performance on Leaders from Within.</p>
+            </div>
+        </div>
+
+        <h3>Additional Data Features</h3>
+        <ul>
+            <li><strong>Occupational Benchmarks:</strong> Typical wages, retention, and mobility for jobs, segmented by experience level and metro size.</li>
+            <li><strong>Premium Skills:</strong> Skills that deliver the strongest wage premiums within each occupation.</li>
+            <li><strong>Next-Step Occupations:</strong> Common next-step occupations that workers move into from each occupation.</li>
+            <li><strong>Hiring Signals:</strong> Company-occupation-metro level data to help navigate users to firms who may be hiring for their skillsets.</li>
+            <li><strong>AI Impact Indicators:</strong> Forward-looking indicators of how artificial intelligence is likely to reshape access and expertise within occupations.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h4>Data Access</h4>
+            <p>Hacking participants receive access to the MCP Server with the American Opportunity Index dataset. Technical onboarding and data use agreements are included later in this packet.</p>
+            <p>Questions? Contact <a href="mailto:hannah@arborimpactadvisors.com" style="color: #667eea;">hannah@arborimpactadvisors.com</a> or <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a></p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 5: The Agenda -->
+    <section id="agenda" class="section container">
+        <h2>The Agenda</h2>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Day 1, Wednesday, January 28th</span>
+        </div>
+        <div class="collapsible-content active">
+            <table class="agenda-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Details / Leads</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-cell">12:00–1:00</td>
+                    <td><strong>Arrival, Lunch & Check-In</strong></td>
+                    <td>Registration, lunch, and networking</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">1:00 – 2:00</td>
+                    <td><strong>Welcome & Opening Remarks</strong></td>
+                    <td>Gates Foundation + Schultz Family Foundation<br><br>Career Navigation & AI Panel<br>Discussion with Gates Foundation, Schultz Family Foundation, Burning Glass Institute, and NextLadder Ventures</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:00–2:30</td>
+                    <td><strong>AOI Dataset Deep Dive</strong></td>
+                    <td>Burning Glass Institute and Schultz Family Foundation overview AOI dataset</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:30–2:45</td>
+                    <td><strong>Break</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:45–3:00</td>
+                    <td><strong>Challenge Pitch</strong></td>
+                    <td>Gates Foundation shares challenge pitch and build sprint #1 details</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">3:30–5:30</td>
+                    <td><strong>Build Sprint #1</strong></td>
+                    <td>Teams to build prototype<br><br>Optional Office Hours<br>Provide ongoing support</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">5:30–6:30</td>
+                    <td><strong>Transit Time</strong></td>
+                    <td>Carpool to Schultz Family Foundation for welcome reception</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">6:00–8:00</td>
+                    <td><strong>Welcome Reception</strong></td>
+                    <td>Refreshments and food at the Schultz Family Foundation Offices<br>(900 N 34th St, Seattle, WA 98103)</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Day 2, Thursday, January 29th</span>
+        </div>
+        <div class="collapsible-content active">
+            <table class="agenda-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Details / Leads</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-cell">8:30–9:00</td>
+                    <td><strong>Breakfast</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">9:00–9:30</td>
+                    <td><strong>Youth Panel: "Perspectives on Career Navigation"</strong></td>
+                    <td>Moderated by Schultz; youth describe needs & trust drivers</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">9:30–12:00</td>
+                    <td><strong>Build Sprint #2</strong></td>
+                    <td>Integrate youth insights; refine models/UI/logic</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">12:00–1:00</td>
+                    <td><strong>Lunch</strong></td>
+                    <td>Lunch and preparation for presentations</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">1:00–2:30</td>
+                    <td><strong>Final Presentations</strong></td>
+                    <td>7-min demo + Q&A; judging on innovation, fairness, impact</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:30 – 2:45</td>
+                    <td><strong>Break</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:45–3:30</td>
+                    <td><strong>Awards & Reflections</strong></td>
+                    <td>"Most Responsible AI", "Most User-Centered Design", etc.</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">3:30–4:00</td>
+                    <td><strong>Closing Remarks & Next Steps</strong></td>
+                    <td>Integration opportunities; AOI March launch preview; Program Feedback (must to have)</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 6: Participants/Partners -->
+    <section id="participants" class="section container">
+        <h2>Participants/Partners</h2>
+        <div class="partners-logo-grid">
+            <div class="partner-logo-card">
+                <div class="partner-name">Ascendium</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">ASU Online</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Ballmer Group</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Basta</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Boeing</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Britebound (ASA)</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Burning Glass Institute</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">CampusEvolve</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">CareerVillage</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Climb Together</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Gates Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">GitLab Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Hack Club</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Intentional Futures</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Murdock Charitable Trust</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">NextLadder Ventures</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">Schultz Family Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">SkillUp Coalition</div>
+            </div>
+            <div class="partner-logo-card">
+                <div class="partner-name">The Unquantifiable</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Submission Details -->
+    <section id="submission" class="section container">
+        <h2>Submission Details</h2>
+        
+        <h3>How to Submit Your Project</h3>
+        <p>All teams are required to submit their code and project materials via GitHub. Please follow the instructions below to ensure your submission is complete and properly formatted.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Submission Requirements</span>
+        </div>
+        <div class="collapsible-content">
+            <div class="highlight-box">
+                <h4>Submission Requirements</h4>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>GitHub Repository:</strong> All code, documentation, and project files must be submitted to a GitHub repository</li>
+                    <li><strong>Repository Access:</strong> Ensure the repository is set to public or provide access to the judging team</li>
+                    <li><strong>README File:</strong> Include a comprehensive README.md file with project description, setup instructions, and usage guide</li>
+                    <li><strong>Code Organization:</strong> Maintain a clean, organized codebase with clear file structure and comments</li>
+                    <li><strong>Documentation:</strong> Include any additional documentation, data sources, or resources used in your project</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Step-by-Step Submission Process</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Step 1: Create GitHub Repository</h4>
+                <p>Create a new repository on GitHub for your team's project. Name it clearly to identify your team and project (e.g., "team-name-aoi-datathon-2024").</p>
+                <ul style="margin-left: 1rem; margin-top: 1rem;">
+                    <li>Go to <a href="https://github.com" target="_blank" style="color: #667eea;">github.com</a></li>
+                    <li>Click "New repository"</li>
+                    <li>Choose a descriptive name</li>
+                    <li>Set repository visibility (public or private with access granted)</li>
+                    <li>Initialize with a README.md file</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 2: Organize Your Code</h4>
+                <p>Structure your repository with clear organization. Include separate directories for code, data, documentation, and presentation materials.</p>
+                <ul style="margin-left: 1rem; margin-top: 1rem;">
+                    <li>Create folders: <code>/src</code>, <code>/docs</code>, <code>/data</code>, <code>/presentation</code></li>
+                    <li>Add clear comments to your code</li>
+                    <li>Include requirements.txt or package.json for dependencies</li>
+                    <li>Document your API endpoints and data sources</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 3: Create README.md</h4>
+                <p>Your README should provide a clear overview of your project, including purpose, features, setup instructions, and how to run the application.</p>
+                <ul style="margin-left: 1rem; margin-top: 1rem;">
+                    <li>Project title and description</li>
+                    <li>Team members and roles</li>
+                    <li>Installation and setup instructions</li>
+                    <li>Usage examples and API documentation</li>
+                    <li>Link to live demo (if applicable)</li>
+                    <li>Acknowledgments and data sources</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 4: Push Your Code</h4>
+                <p>Upload all your project files to the repository. Make sure to commit regularly with clear commit messages.</p>
+                <ul style="margin-left: 1rem; margin-top: 1rem;">
+                    <li>Initialize git in your project directory</li>
+                    <li>Add all project files: <code>git add .</code></li>
+                    <li>Commit with descriptive message: <code>git commit -m "Initial project submission"</code></li>
+                    <li>Push to GitHub: <code>git push origin main</code></li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 5: Submit Repository Link</h4>
+                <p>Submit your GitHub repository URL through the official submission portal or email to the organizing team by the deadline.</p>
+                <ul style="margin-left: 1rem; margin-top: 1rem;">
+                    <li>Copy your repository URL (e.g., <a href="https://github.com/xd2164/data_a_thon" target="_blank" style="color: #667eea;">https://github.com/xd2164/data_a_thon</a>)</li>
+                    <li>Submit via the provided submission form</li>
+                    <li>Include your team name and project title</li>
+                    <li>Deadline: Check agenda for submission deadline</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Repository Template & Checklist</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="highlight-box" style="margin-top: 0;">
+            <h4>GitHub Repository Template</h4>
+            <p>We recommend using the following repository structure:</p>
+            <pre style="background: #2c3e50; color: #ecf0f1; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin-top: 1rem; font-family: 'Courier New', monospace;">
+your-repository-name/
+├── README.md
+├── requirements.txt (or package.json)
+├── src/
+│   ├── main.py (or main.js, etc.)
+│   ├── models/
+│   ├── utils/
+│   └── ...
+├── data/
+│   ├── raw/
+│   └── processed/
+├── docs/
+│   ├── api_documentation.md
+│   └── architecture.md
+├── presentation/
+│   ├── slides.pdf
+│   └── demo_video.mp4
+└── LICENSE
+            </pre>
+        </div>
+
+        <h3>Submission Checklist</h3>
+        <div class="highlight-box">
+            <ul style="margin-left: 1.5rem;">
+                <li>☐ GitHub repository created and properly named</li>
+                <li>☐ All code committed and pushed to repository</li>
+                <li>☐ README.md file with complete project documentation</li>
+                <li>☐ Requirements/dependencies file included</li>
+                <li>☐ Code is well-commented and organized</li>
+                <li>☐ Presentation slides/demo materials included (if applicable)</li>
+                <li>☐ Repository is accessible to judges</li>
+                <li>☐ Repository URL submitted before deadline</li>
+            </ul>
+        </div>
+        </div>
+
+        <h3>Important Notes</h3>
+        <ul style="margin-left: 2rem;">
+            <li><strong>Deadline:</strong> All submissions must be received before the final presentation session on Day 2 (January 29th)</li>
+            <li><strong>Contact:</strong> For technical issues with submissions, contact <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a></li>
+            <li><strong>Collaboration:</strong> Ensure all team members have access to the repository and are listed as contributors</li>
+            <li><strong>Data Usage:</strong> Remember to comply with data use agreements when sharing code that uses AOI data</li>
+        </ul>
+    </section>
+
+    <!-- Project Showcase Section -->
+    <section id="showcase" class="section container">
+        <h2>Project Showcase</h2>
+        <p>Explore innovative projects developed during the datathon. Teams created AI-enabled career navigation tools using the American Opportunity Index dataset.</p>
+        
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+            
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="showcase-placeholder">
+            <p>More projects will be added after the datathon presentations. Teams can submit their project details and links through the submission portal.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 AI-Enabled Career Navigation Datathon. Hosted by Gates Foundation & Schultz Family Foundation.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://docs.google.com/document/d/17fU8pi_tLbFmZTBD8AEcQYKJ8hDksT7j7dxUAsPo4sg/edit?tab=t.0" target="_blank">View Full Participant Packet Document</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Toggle collapsible sections
+        function toggleCollapsible(header) {
+            const content = header.nextElementSibling;
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+        
+        // Removed 3D mouse tracking for static, smooth transitions
+        
+        // Remove scroll animations for static, smooth transitions
+        // Sections are now visible by default without fade-in effects
+        
+        // Floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = `rgba(${Math.random() > 0.5 ? '0, 212, 255' : '102, 126, 234'}, ${0.3 + Math.random() * 0.4})`;
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.boxShadow = `0 0 ${4 + Math.random() * 4}px currentColor`;
+            
+            document.body.appendChild(particle);
+            
+            const duration = 3000 + Math.random() * 2000;
+            const endLeft = (Math.random() - 0.5) * 200;
+            
+            particle.animate([
+                { transform: 'translate(0, 0) scale(1)', opacity: 0 },
+                { transform: `translate(${endLeft}px, -100vh) scale(${0.5 + Math.random() * 0.5})`, opacity: 1, offset: 0.2 },
+                { transform: `translate(${endLeft}px, -100vh) scale(${0.5 + Math.random() * 0.5})`, opacity: 0.8, offset: 0.8 },
+                { transform: `translate(${endLeft}px, -100vh) scale(0)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'linear'
+            }).onfinish = () => particle.remove();
+        }
+        
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+        
+        // Enhanced hover effects for links
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>
