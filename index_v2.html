@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enabled Career Navigation Datathon | Participant Packet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.4;
+            color: #1a1a2e;
+            background: #0a0e27;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at top, #1a1a3e 0%, #0a0e27 100%);
+            opacity: 0.4;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(102, 126, 234, 0.03) 2px,
+                rgba(102, 126, 234, 0.03) 4px
+            );
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #667eea);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #16213e 100%);
+            color: white;
+            padding: 3.5rem 2rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .hero .hosts {
+            font-size: 0.95rem;
+            margin-top: 1.25rem;
+            opacity: 0.75;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+        }
+
+        .hero .event-info {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero .info-item {
+            text-align: center;
+            padding: 0.75rem 1.25rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .hero .info-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .hero .info-label {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .hero .info-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        /* Section Styling */
+        .section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2), 0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #667eea;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
+        }
+
+        .section h3 {
+            color: #2c3e50;
+            font-size: 1.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .section h4 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .section p {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .section ul, .section ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Use Case Cards */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .use-case-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .use-case-card p {
+            margin-bottom: 0.65rem;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+        
+        .use-case-card ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .use-case-card ul li {
+            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .use-case-card h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        /* Rubric Table */
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rubric-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .rubric-table td {
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .rubric-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .score-boxes {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .score-box {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Partners Grid */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .partner-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-3px);
+            background: #e9ecef;
+        }
+
+        /* Agenda Table */
+        .agenda-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .agenda-table th {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .agenda-table td {
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .agenda-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .time-cell {
+            font-weight: 600;
+            color: #667eea;
+            white-space: nowrap;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0.65rem;
+        }
+        
+        .highlight-box ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2.5rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero .event-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .rubric-table, .agenda-table {
+                font-size: 0.85rem;
+            }
+
+            .rubric-table th, .rubric-table td,
+            .agenda-table th, .agenda-table td {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Data Section Special */
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .data-stat {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .data-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Code Styling */
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: transparent;
+            color: #ecf0f1;
+            padding: 0;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-header {
+            cursor: pointer;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #667eea;
+            user-select: none;
+        }
+
+        .collapsible-header:hover {
+            background: linear-gradient(135deg, #667eea25 0%, #764ba225 100%);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .collapsible-header::after {
+            content: '▼';
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+            color: #667eea;
+        }
+
+        .collapsible-header.active::after {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .collapsible-content.active {
+            max-height: 5000px;
+            padding: 1.25rem;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 1.25rem;
+        }
+        
+        .collapsible-content p {
+            margin-bottom: 0.65rem;
+            line-height: 1.4;
+        }
+
+        /* Project Showcase */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .showcase-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,249,250,0.98) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .showcase-card h4 {
+            color: #667eea;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        .showcase-card .team-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-card .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .showcase-card .project-link:hover {
+            color: #00d4ff;
+        }
+
+        .showcase-placeholder {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(102, 126, 234, 0.05);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        /* Partner Logos */
+        .partners-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .partner-logo-card {
+            background: white;
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .partner-logo-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .partner-logo-card img {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 0.75rem;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo-card:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .partner-logo-card .logo-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            color: #667eea;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-logo-card .logo-placeholder {
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-logo-card .partner-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c3e50;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="#challenge">Challenge</a></li>
+            <li><a href="#data">Data</a></li>
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#participants">Participants</a></li>
+            <li><a href="#showcase">Projects</a></li>
+            <li><a href="#submission">Submission</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI-Enabled Career Navigation Datathon</h1>
+            <p class="subtitle">American Opportunity Index Hackathon</p>
+            <p class="hosts">Hosted by Gates Foundation & Schultz Family Foundation</p>
+            <div class="event-info">
+                <div class="info-item">
+                    <div class="info-label">Dates</div>
+                    <div class="info-value">January 28-29</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Location</div>
+                    <div class="info-value">Seattle, WA</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Format</div>
+                    <div class="info-value">In-Person</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Welcome and Overview -->
+    <section id="welcome" class="section container">
+        <h2>Welcome and Overview</h2>
+        <p><strong>Welcome!</strong> Thank you for joining us for the AI-Enabled Career Navigation Datathon, hosted by the Gates Foundation and the Schultz Family Foundation.</p>
+        
+        <p>We are coming together at a moment of real inflection for the career navigation field. Artificial intelligence is rapidly reshaping the workforce—changing skill requirements, career trajectories, and the meaning of entry-level opportunity. As this shift accelerates, the tools we build must evolve. It is no longer sufficient to help young adults and workers navigate by role or wage alone. We must help them understand where opportunity actually develops.</p>
+
+        <p>This datathon is designed to bring leaders from across the field together to build, test, and experiment with new approaches to career navigation. Using the American Opportunity Index as a shared data foundation, we will prototype next-generation, public-use tools that help young adults and workers make more informed, equitable decisions about their futures.</p>
+
+        <p>The goal is not simply to analyze the data, but to turn it into actionable infrastructure for the field. Together, we aim to advance a new generation of AI-enabled navigation tools that are grounded in real mobility outcomes, shaped by practitioner insight, and informed by the lived experience of young people.</p>
+
+        <p>Over the course of the two days, you will collaborate with peers, youth participants, and technical advisors to explore how data, technology, and design can come together to improve long-term outcomes for learners and workers. We are excited to build alongside you and grateful for your partnership in strengthening the future of career navigation.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>High-Level Logistics</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="highlight-box">
+            <p><strong>Event Dates:</strong> January 28–29</p>
+            <p><strong>Location:</strong> Gates Foundation Headquarters, 500 Fifth Avenue North, Seattle, WA 98109</p>
+            <p><strong>Participants:</strong> Career navigation organizations, technical advisors, funders, and youth leaders. Please find a list of organizations and participants in section five.</p>
+
+            <h4 style="margin-top: 1.5rem;">Event Goals:</h4>
+            <ul style="margin-left: 1.5rem;">
+                <li>Build community and accelerate shared learning across navigation partners.</li>
+                <li>Prototype responsible AI career navigation tools using AOI and complementary datasets.</li>
+                <li>Model ethical AI practices, including explainability, privacy, and bias auditing.</li>
+                <li>Center youth voices through embedded participation and dedicated evaluation sessions.</li>
+                <li>Generate reusable technical components, including APIs, prompts, models, and user-facing interfaces.</li>
+                <li>Establish an early learning loop to understand how this data influences young people's decisions and long-term mobility outcomes.</li>
+            </ul>
+
+            <p style="margin-top: 1.5rem;"><strong>API and Data Access:</strong> Participants who are participating in hacking will receive access to the MCP Server, which includes the American Opportunity Index dataset. Additional instructions for technical onboarding and data use agreements are included later in this packet. Please reach out to hannah@arborimpactadvisors.com and tech@schultzfamilyfoundation.org if you have additional questions.</p>
+
+            <p><strong>Agenda Overview:</strong> Day one will kick off with lunch and networking at 12:00pm and focus on orientation, framing, and prototyping. Day two will kick off at 8:30am and will focus on tool refinement, youth feedback, and final presentations.</p>
+
+            <p>Additional details—including the full run-of-show, participant roles, youth engagement sessions, and technical resources—are provided in the following sections.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The Challenge Prompt -->
+    <section id="challenge" class="section container">
+        <h2>The Challenge Prompt</h2>
+        <h3>AI-Enabled Career Navigation Tool to Drive Economic Mobility</h3>
+        <h4>Datathon Challenge Prompt</h4>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Purpose and Opportunity</span>
+        </div>
+        <div class="collapsible-content active">
+            <p>The rapid growth of large language models (LLMs) and generative AI is reshaping how learners and workers navigate an increasingly complex labor market. Yet without transparent, equitable data foundations, these tools risk reinforcing bias and misinformation. The American Opportunity Index (AOI)—a longitudinal dataset covering 1,700 companies, 12 million workers, and 923 O*NET occupation codes—offers an unprecedented opportunity to build AI-enabled navigation tools grounded in real mobility outcomes rather than unverified internet data. This joint Gates–Schultz Data-a-thon will prototype next-generation AI career navigation tools that use AOI data responsibly to surface mobility-friendly pathways for young people, especially those in under-resourced communities.</p>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Challenge Prompts & Use Cases</span>
+        </div>
+        <div class="collapsible-content active">
+            <p>Given that each organization knows its own users, contexts, and constraints best, the goal of this Datathon is not to build a one-size-fits-all solution, but to create a compelling, user-centered tool that brings the American Opportunity Index to life for the people you serve. Teams are encouraged to start from their real users—young people, learners, workers, or advisors—and design AI-enabled experiences that translate the data into insights that are meaningful, trustworthy, and actionable in practice. Success is less about technical completeness and more about clarity of use case, thoughtful integration of the data, and a strong narrative that shows how this tool could improve career navigation and economic mobility for youth. Examples might include the following use cases.</p>
+
+            <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Use Case 1: Mobility Matchmaker</h4>
+                <p>Career mobility is often discussed but rarely operationalized in data systems. Learners and job seekers may see job titles or wages, but they lack visibility into whether employers or pathways actually support advancement over time. This use case focuses on understanding what signals—such as credentials, skills progression, promotion patterns, retention, or local labor market dynamics—can be combined to meaningfully characterize "mobility-friendly" pathways. Participants may explore how different definitions of mobility shape recommendations, and how data could be used to surface opportunities that are promising but not obvious through traditional job search tools.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 2: Explainable Career Paths</h4>
+                <p>Many AI-enabled career tools generate recommendations without clearly explaining the rationale behind them. This limits trust, interpretability, and agency. This use case examines how large language models and structured outcomes data might be used together to articulate why certain transitions, credentials, or pathways are associated with stronger outcomes. The focus is on explanation rather than prediction—exploring narrative framing, comparative reasoning, and transparency, and considering how different audiences (learners, families, advisors) may interpret and use these explanations.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 3: Bias Audit Toolkit</h4>
+                <p>AI systems can unintentionally reproduce or amplify inequities if outcomes differ systematically across demographic or geographic groups. This use case centers on analytical approaches to examining equity in career recommendations and pathway suggestions. Participants may explore how to detect disparities, define fairness metrics appropriate to career navigation, and visualize differences in access or outcomes. The goal is to better understand where bias may emerge, how it can be measured, and what kinds of reporting or auditing mechanisms could support accountability and responsible use.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 4: Youth-Facing Interface</h4>
+                <p>Career navigation tools often assume high levels of prior knowledge, digital fluency, and institutional familiarity—assumptions that do not hold for many first-generation or early-career users. This use case focuses on how data-driven insights might be translated into accessible, supportive guidance experiences. Participants may examine how language, framing, pacing, and representation influence comprehension and trust, and how AI-mediated guidance can support exploration without prescribing outcomes. The emphasis is on sense-making and user experience rather than technical implementation.</p>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Use Case 5: Data Gap Discovery Toolkit</h4>
+                <p>Limitations in data availability and quality constrain what AI-driven navigation systems can meaningfully support. This use case invites participants to identify which missing or underdeveloped data most limit current approaches—such as informal learning, non-linear pathways, lived experience, or long-term mobility outcomes. Participants may explore how these gaps affect downstream recommendations and consider realistic strategies for addressing them after the Data-a-thon, including data partnerships, new collection methods, or governance models.</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>The Rubric</span>
+        </div>
+        <div class="collapsible-content">
+            <p>Please find a scoring rubric below that will help the judges evaluate the final demos/presentations.</p>
+            <p><strong>Scoring scale:</strong> 1 = Limited · 3 = Solid · 5 = Excellent (Use 2 or 4 for in-between performance) Maximum score: 30 points</p>
+
+            <table class="rubric-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Criteria</th>
+                    <th>1 – Limited</th>
+                    <th>3 – Solid</th>
+                    <th>5 – Excellent</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Career Navigation Value</strong></td>
+                    <td>Problem vague; generic job matching</td>
+                    <td>Clear user and career problem</td>
+                    <td>Reframes mobility with actionable pathway insight</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>AOI Data Use & Integrity</strong></td>
+                    <td>AOI unclear, misused, or overstated</td>
+                    <td>AOI used correctly with basic explanation</td>
+                    <td>Nuanced AOI use; assumptions and limits explicit</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Explainability & Trust</strong></td>
+                    <td>Recommendations are a black box</td>
+                    <td>Some explanation of reasoning</td>
+                    <td>Clear, transparent, user-interrogable logic</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>Equity & Responsible AI</strong></td>
+                    <td>Equity not considered</td>
+                    <td>Equity risks acknowledged</td>
+                    <td>Equity central; bias examined or audited</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>User-Centered Design & Reuse</strong></td>
+                    <td>Hard to use; tech-first</td>
+                    <td>Generally usable and relevant</td>
+                    <td>Youth-affirming, reusable, pilot-ready</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><strong>Long-term Outcomes</strong></td>
+                    <td>Outputs only; no path to impact</td>
+                    <td>Identifies desired long-term outcomes and basic tracking</td>
+                    <td>Demonstrates clear long-term mobility impact and a plan to measure, learn, and improve over time</td>
+                    <td>
+                        <div class="score-boxes">
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                            <span class="score-box"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 4: The Data -->
+    <section id="data" class="section container">
+        <h2>The Data</h2>
+        <p><strong>Key Links:</strong> <a href="#" style="color: #667eea;">Data Dictionary</a></p>
+
+        <p>The American Opportunity Index (AOI) dataset provides an outcomes-based view of worker mobility across the largest employers in the United States to assess companies and company-occupation pairs across 3 dimensions of job quality. It is built from longitudinal analysis of approximately 12 million observed worker career histories, combined with job postings and wage data, covering 1,763 large U.S. employers, 563 occupational clusters, and over 55,000 employer-occupation pairs.</p>
+
+        <div class="data-stats">
+            <div class="data-stat">
+                <div class="data-stat-number">12M</div>
+                <div class="data-stat-label">Worker Career Histories</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">1,763</div>
+                <div class="data-stat-label">Large U.S. Employers</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">563</div>
+                <div class="data-stat-label">Occupational Clusters</div>
+            </div>
+            <div class="data-stat">
+                <div class="data-stat-number">55,000+</div>
+                <div class="data-stat-label">Employer-Occupation Pairs</div>
+            </div>
+        </div>
+
+        <p>The purpose of the dataset is to provide a broad range of stakeholders insights on the employers and jobs that best match their priorities. We recognize that job quality is not uniform: the same employer may offer strong opportunity in some occupations and limited opportunity in others. Meanwhile, some occupations may provide strong opportunity at some employers and limited opportunity at others. Assessing occupations at the company-occupation level helps bring actionability to these variances.</p>
+
+        <p>We evaluate jobs and employers across the core outcomes measures that matter most to workers (wages, stability/retention, promotion/mobility). These metrics are combined into three distinct archetypes that reflect different ways a job can offer opportunity. <strong>Early Career jobs</strong> are accessible to entry-level workers and lead to promotion and advancement; <strong>Growth jobs</strong> enable upward mobility within and beyond the firm, particularly in organizations that promote from within; and <strong>Stability jobs</strong> offer strong pay and long-term retention. Employers and employer-occupation pairs are rated within each archetype using Platinum (top 20%) and Gold (next 20%) designations, allowing users to see both overall performance and role-specific strengths.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Core Metrics & Data Details</span>
+        </div>
+        <div class="collapsible-content">
+        <h3>Core Metrics</h3>
+        <ul>
+            <li><strong>Wages:</strong> Salary and wages for an occupation at a company as measured between 2019 and 2024, normalized to 2024 dollars, based on Glassdoor data.</li>
+            <li><strong>Retention:</strong> Likelihood that a worker remains at the company for at least three years, based on observed job starts between 2017 and 2021.</li>
+            <li><strong>Internal Promotion:</strong> Of workers who started in a given job between 2015 and 2019, this metric measures the share of workers who are in a higher paying role at the same employer within 5 years (i.e., 2020 thru 2024).</li>
+            <li><strong>External Promotion (Advancement Beyond):</strong> Of workers who started in a given job between 2015 and 2019, this metric measures the share of workers who find themselves in a higher paying role at a different employer within 5 years (i.e., 2020 thru 2024).</li>
+            <li><strong>Entry Level:</strong> Share of new hires with fewer than three years of experience, based on observed job starts between 2019 and 2024.</li>
+            <li><strong>Leaders From Within:</strong> Share of top earners who rose into leadership roles internally. This is only metric that is calculated at the company level, as it reflects firm-wide leadership pathways rather than occupation-specific outcomes.</li>
+        </ul>
+
+        <h3>Three Job Quality Archetypes</h3>
+        <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Early Career Jobs</h4>
+                <p>Composite of internal promotion and external promotion, filtered for company-occupation pairs with over 20% of hires at the entry level.</p>
+            </div>
+            <div class="use-case-card">
+                <h4>Stability Jobs</h4>
+                <p>Composite of wages and retention.</p>
+            </div>
+            <div class="use-case-card">
+                <h4>Growth Jobs</h4>
+                <p>Composite of internal promotion and external promotion, filtered for companies with strong performance on Leaders from Within.</p>
+            </div>
+        </div>
+
+        <h3>Additional Data Features</h3>
+        <ul>
+            <li><strong>Occupational Benchmarks:</strong> Typical wages, retention, and mobility for jobs, segmented by experience level and metro size.</li>
+            <li><strong>Premium Skills:</strong> Skills that deliver the strongest wage premiums within each occupation.</li>
+            <li><strong>Next-Step Occupations:</strong> Common next-step occupations that workers move into from each occupation.</li>
+            <li><strong>Hiring Signals:</strong> Company-occupation-metro level data to help navigate users to firms who may be hiring for their skillsets.</li>
+            <li><strong>AI Impact Indicators:</strong> Forward-looking indicators of how artificial intelligence is likely to reshape access and expertise within occupations.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h4>Data Access</h4>
+            <p>Participants who are participating in hacking will receive access to the MCP Server, which includes the American Opportunity Index dataset. Additional instructions for technical onboarding and data use agreements are included later in this packet.</p>
+            <p>For questions, please reach out to: <a href="mailto:hannah@arborimpactadvisors.com" style="color: #667eea;">hannah@arborimpactadvisors.com</a> and <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a></p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Section 5: The Agenda -->
+    <section id="agenda" class="section container">
+        <h2>The Agenda</h2>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Day 1, Wednesday, January 28th</span>
+        </div>
+        <div class="collapsible-content active">
+            <table class="agenda-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Details / Leads</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-cell">12:00–1:00</td>
+                    <td><strong>Arrival, Lunch & Check-In</strong></td>
+                    <td>Registration, lunch, and networking</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">1:00 – 2:00</td>
+                    <td><strong>Welcome & Opening Remarks</strong></td>
+                    <td>Gates Foundation + Schultz Family Foundation<br><br>Career Navigation & AI Panel<br>Discussion with Gates Foundation, Schultz Family Foundation, Burning Glass Institute, and NextLadder Ventures</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:00–2:30</td>
+                    <td><strong>AOI Dataset Deep Dive</strong></td>
+                    <td>Burning Glass Institute and Schultz Family Foundation to overview AOI dataset</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:30–2:45</td>
+                    <td><strong>Break</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:45–3:00</td>
+                    <td><strong>Challenge Pitch</strong></td>
+                    <td>Gates Foundation to share challenge pitch and details for build sprint #1</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">3:30–5:30</td>
+                    <td><strong>Build Sprint #1</strong></td>
+                    <td>Teams to build prototype<br><br>Optional Office Hours<br>Provide ongoing support</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">5:30–6:30</td>
+                    <td><strong>Transit Time</strong></td>
+                    <td>Carpool to Schultz Family Foundation for welcome reception</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">6:00–8:00</td>
+                    <td><strong>Welcome Reception</strong></td>
+                    <td>Refreshments and food at the Schultz Family Foundation Offices<br>(900 N 34th St, Seattle, WA 98103)</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Day 2, Thursday, January 29th</span>
+        </div>
+        <div class="collapsible-content active">
+            <table class="agenda-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Details / Leads</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-cell">8:30–9:00</td>
+                    <td><strong>Breakfast</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">9:00–9:30</td>
+                    <td><strong>Youth Panel: "Perspectives on Career Navigation"</strong></td>
+                    <td>Moderated by Schultz; youth describe needs & trust drivers</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">9:30–12:00</td>
+                    <td><strong>Build Sprint #2</strong></td>
+                    <td>Integrate youth insights; refine models/UI/logic</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">12:00–1:00</td>
+                    <td><strong>Lunch</strong></td>
+                    <td>Lunch and preparation for presentations</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">1:00–2:30</td>
+                    <td><strong>Final Presentations</strong></td>
+                    <td>7-min demo + Q&A; judging on innovation, fairness, impact</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:30 – 2:45</td>
+                    <td><strong>Break</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time-cell">2:45–3:30</td>
+                    <td><strong>Awards & Reflections</strong></td>
+                    <td>"Most Responsible AI", "Most User-Centered Design", etc.</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">3:30–4:00</td>
+                    <td><strong>Closing Remarks & Next Steps</strong></td>
+                    <td>Integration opportunities; AOI March launch preview; Program Feedback (must to have)</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- Section 6: Participants/Partners -->
+    <section id="participants" class="section container">
+        <h2>Participants/Partners</h2>
+        <div class="partners-logo-grid">
+            <div class="partner-logo-card">
+                <img src="logos/ascendium.png" alt="Ascendium" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Ascendium</div>
+                <div class="partner-name">Ascendium</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/asu-online.png" alt="ASU Online" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">ASU Online</div>
+                <div class="partner-name">ASU Online</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/ballmer-group.png" alt="Ballmer Group" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Ballmer Group</div>
+                <div class="partner-name">Ballmer Group</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/basta.png" alt="Basta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Basta</div>
+                <div class="partner-name">Basta</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/boeing.png" alt="Boeing" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Boeing</div>
+                <div class="partner-name">Boeing</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/britebound-asa.png" alt="Britebound (ASA)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Britebound</div>
+                <div class="partner-name">Britebound (ASA)</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/burning-glass-institute.png" alt="Burning Glass Institute" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">BGI</div>
+                <div class="partner-name">Burning Glass Institute</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/campusevolve.png" alt="CampusEvolve" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">CampusEvolve</div>
+                <div class="partner-name">CampusEvolve</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/careervillage.png" alt="CareerVillage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">CareerVillage</div>
+                <div class="partner-name">CareerVillage</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/climb-together.png" alt="Climb Together" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Climb Together</div>
+                <div class="partner-name">Climb Together</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/gates-foundation.png" alt="Gates Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Gates</div>
+                <div class="partner-name">Gates Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/gitlab-foundation.png" alt="GitLab Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">GitLab</div>
+                <div class="partner-name">GitLab Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/hack-club.png" alt="Hack Club" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Hack Club</div>
+                <div class="partner-name">Hack Club</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/intentional-futures.png" alt="Intentional Futures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Intentional Futures</div>
+                <div class="partner-name">Intentional Futures</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/murdock-trust.png" alt="Murdock Charitable Trust" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Murdock Trust</div>
+                <div class="partner-name">Murdock Charitable Trust</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/nextladder-ventures.png" alt="NextLadder Ventures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">NextLadder</div>
+                <div class="partner-name">NextLadder Ventures</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/schultz-family-foundation.png" alt="Schultz Family Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Schultz Foundation</div>
+                <div class="partner-name">Schultz Family Foundation</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/skillup-coalition.png" alt="SkillUp Coalition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">SkillUp</div>
+                <div class="partner-name">SkillUp Coalition</div>
+            </div>
+            <div class="partner-logo-card">
+                <img src="logos/unquantifiable.png" alt="The Unquantifiable" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">Unquantifiable</div>
+                <div class="partner-name">The Unquantifiable</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Submission Details -->
+    <section id="submission" class="section container">
+        <h2>Submission Details</h2>
+        
+        <h3>How to Submit</h3>
+        <p>Submit your code and project materials via GitHub. Follow the instructions below to ensure complete, properly formatted submissions.</p>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Requirements</span>
+        </div>
+        <div class="collapsible-content">
+            <div class="highlight-box">
+                <ul style="margin-left: 1.5rem; list-style: none;">
+                    <li style="margin-bottom: 0.75rem;"><strong>GitHub Repository:</strong> All code, documentation, and project files</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Repository Access:</strong> Public repository or grant access to judging team</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>README.md:</strong> Project description, setup instructions, and usage guide</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Code Organization:</strong> Clean structure with clear comments</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Documentation:</strong> Additional docs, data sources, and resources</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Step-by-Step Process</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="use-cases">
+            <div class="use-case-card">
+                <h4>Step 1: Create Repository</h4>
+                <p>Create a new GitHub repository with a clear name (e.g., "team-name-aoi-datathon-2024").</p>
+                <ul style="margin-left: 1rem; margin-top: 0.75rem;">
+                    <li>Go to <a href="https://github.com" target="_blank" style="color: #667eea;">github.com</a></li>
+                    <li>Click "New repository"</li>
+                    <li>Set visibility (public or private with access)</li>
+                    <li>Initialize with README.md</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 2: Organize Code</h4>
+                <p>Structure your repository with clear directories and organization.</p>
+                <ul style="margin-left: 1rem; margin-top: 0.75rem;">
+                    <li>Create folders: <code>/src</code>, <code>/docs</code>, <code>/data</code>, <code>/presentation</code></li>
+                    <li>Add code comments</li>
+                    <li>Include requirements.txt or package.json</li>
+                    <li>Document API endpoints and data sources</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 3: Create README</h4>
+                <p>Provide a clear project overview including setup and usage instructions.</p>
+                <ul style="margin-left: 1rem; margin-top: 0.75rem;">
+                    <li>Project title and description</li>
+                    <li>Team members and roles</li>
+                    <li>Installation and setup</li>
+                    <li>Usage examples and API docs</li>
+                    <li>Live demo link (if applicable)</li>
+                    <li>Data sources and acknowledgments</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 4: Push Code</h4>
+                <p>Commit and push all project files to GitHub.</p>
+                <ul style="margin-left: 1rem; margin-top: 0.75rem;">
+                    <li>Initialize git: <code>git init</code></li>
+                    <li>Add files: <code>git add .</code></li>
+                    <li>Commit: <code>git commit -m "Initial submission"</code></li>
+                    <li>Push: <code>git push origin main</code></li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>Step 5: Submit Link</h4>
+                <p>Submit your repository URL through the submission portal by the deadline.</p>
+                <ul style="margin-left: 1rem; margin-top: 0.75rem;">
+                    <li>Copy repository URL</li>
+                    <li>Submit via provided form</li>
+                    <li>Include team name and project title</li>
+                    <li>Deadline: See agenda for details</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Repository Template & Checklist</span>
+        </div>
+        <div class="collapsible-content">
+        <div class="highlight-box" style="margin-top: 0;">
+            <h4>Recommended Repository Structure</h4>
+            <p>Use the following structure for your repository:</p>
+            <pre style="background: #2c3e50; color: #ecf0f1; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin-top: 1rem; font-family: 'Courier New', monospace;">
+your-repository-name/
+├── README.md
+├── requirements.txt (or package.json)
+├── src/
+│   ├── main.py (or main.js, etc.)
+│   ├── models/
+│   ├── utils/
+│   └── ...
+├── data/
+│   ├── raw/
+│   └── processed/
+├── docs/
+│   ├── api_documentation.md
+│   └── architecture.md
+├── presentation/
+│   ├── slides.pdf
+│   └── demo_video.mp4
+└── LICENSE
+            </pre>
+        </div>
+
+        <h3>Submission Checklist</h3>
+        <div class="highlight-box">
+            <ul style="margin-left: 1.5rem; list-style: none;">
+                <li style="margin-bottom: 0.5rem;">☐ GitHub repository created and named</li>
+                <li style="margin-bottom: 0.5rem;">☐ All code committed and pushed</li>
+                <li style="margin-bottom: 0.5rem;">☐ README.md with complete documentation</li>
+                <li style="margin-bottom: 0.5rem;">☐ Requirements/dependencies file included</li>
+                <li style="margin-bottom: 0.5rem;">☐ Code well-commented and organized</li>
+                <li style="margin-bottom: 0.5rem;">☐ Presentation materials included (if applicable)</li>
+                <li style="margin-bottom: 0.5rem;">☐ Repository accessible to judges</li>
+                <li style="margin-bottom: 0.5rem;">☐ Repository URL submitted before deadline</li>
+            </ul>
+        </div>
+        </div>
+
+        <h3>Important Notes</h3>
+        <ul style="margin-left: 2rem; list-style: none;">
+            <li style="margin-bottom: 0.5rem;"><strong>Deadline:</strong> Before final presentations on Day 2 (January 29th)</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Contact:</strong> <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a> for technical issues</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Collaboration:</strong> Ensure all team members have repository access and are listed as contributors</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Data Usage:</strong> Comply with data use agreements when sharing AOI-based code</li>
+        </ul>
+    </section>
+
+    <!-- Project Showcase Section -->
+    <section id="showcase" class="section container">
+        <h2>Project Showcase</h2>
+        <p>Explore the innovative projects developed during the datathon. Each team has created AI-enabled career navigation tools using the American Opportunity Index dataset.</p>
+        
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+            
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="team-name">Team Project Placeholder</div>
+                <h4>Project Title</h4>
+                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" class="project-link">GitHub Repository →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="showcase-placeholder">
+            <p>More projects will be added after the datathon presentations. Teams can submit their project details and links through the submission portal.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AI-Enabled Career Navigation Datathon. Hosted by Gates Foundation & Schultz Family Foundation.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://docs.google.com/document/d/17fU8pi_tLbFmZTBD8AEcQYKJ8hDksT7j7dxUAsPo4sg/edit?tab=t.0" target="_blank">View Full Participant Packet Document</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Toggle collapsible sections
+        function toggleCollapsible(header) {
+            const content = header.nextElementSibling;
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
