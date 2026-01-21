@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+be<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -760,6 +760,88 @@
             color: #2c3e50;
             word-wrap: break-word;
         }
+
+        /* Host Logos */
+        .hosts-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            margin: 2rem auto;
+            flex-wrap: wrap;
+            max-width: 1000px;
+        }
+
+        .host-logo {
+            flex: 0 1 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .host-logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        /* Partners List */
+        .partners-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .partner-name-item {
+            position: relative;
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .partner-name-item::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 0.7rem;
+        }
+
+        .partner-name-item:hover {
+            color: #667eea;
+            transform: translateX(3px);
+        }
+
+        /* FAQ Styling */
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .faq-item h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.15rem;
+        }
+
+        .faq-item p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -806,7 +888,7 @@
         <h2>Welcome and Overview</h2>
         <p><strong>Welcome!</strong> Thank you for joining us for the AI-Enabled Career Navigation Datathon, hosted by the Gates Foundation and the Schultz Family Foundation.</p>
         
-        <p>We are coming together at a moment of real inflection for the career navigation field. Artificial intelligence is rapidly reshaping the workforce—changing skill requirements, career trajectories, and the meaning of entry-level opportunity. As this shift accelerates, the tools we build must evolve. It is no longer sufficient to help young adults and workers navigate by role or wage alone. We must help them understand where opportunity actually develops.</p>
+        <p>We are coming together at a moment of real inflection for the career navigation field. Artificial intelligence is rapidly reshaping the workforce—changing skill requirements, career trajectories, and the meaning of entry-level opportunity. As this shift accelerates, AI enables us to move beyond simplified signals and toward a more complete picture of opportunity. This creates enormous potential for more personalized and impactful navigation, while also introducing new complexity. This datathon is an opportunity to work through that nuance together.</p>
 
         <p>This datathon is designed to bring leaders from across the field together to build, test, and experiment with new approaches to career navigation. Using the American Opportunity Index as a shared data foundation, we will prototype next-generation, public-use tools that help young adults and workers make more informed, equitable decisions about their futures.</p>
 
@@ -1084,6 +1166,41 @@
             <p>For questions, please reach out to: <a href="mailto:hannah@arborimpactadvisors.com" style="color: #667eea;">hannah@arborimpactadvisors.com</a> and <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a></p>
         </div>
         </div>
+
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <span>Frequently Asked Questions</span>
+        </div>
+        <div class="collapsible-content">
+            <div class="faq-item">
+                <h4>What is the American Opportunity Index (AOI)?</h4>
+                <p>The American Opportunity Index is an outcomes-based dataset that evaluates job quality and worker mobility across 1,763 large U.S. employers. It analyzes approximately 12 million worker career histories to measure how well companies and specific job roles support economic advancement through wages, retention, and promotion opportunities.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What time period does the dataset cover?</h4>
+                <p>The AOI dataset covers multiple time periods depending on the metric: wage data from 2019-2024, retention analysis from 2017-2021, and promotion metrics tracking workers who started between 2015-2019 and their outcomes through 2024. This longitudinal approach provides a comprehensive view of career trajectories over time.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How can I access the data during the datathon?</h4>
+                <p>Participants will receive access to the MCP Server, which includes the full American Opportunity Index dataset. Technical onboarding instructions and data use agreements will be provided at the event. For pre-event questions about data access, contact <a href="mailto:hannah@arborimpactadvisors.com" style="color: #667eea;">hannah@arborimpactadvisors.com</a> and <a href="mailto:tech@schultzfamilyfoundation.org" style="color: #667eea;">tech@schultzfamilyfoundation.org</a>.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What are the three job quality archetypes?</h4>
+                <p>The AOI evaluates jobs through three distinct lenses: <strong>Early Career Jobs</strong> (accessible entry-level roles with strong advancement potential), <strong>Growth Jobs</strong> (positions that enable upward mobility within and beyond the firm), and <strong>Stability Jobs</strong> (roles offering competitive wages and long-term retention). Each archetype uses different combinations of metrics to reflect what matters most for that career stage.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What are the limitations of this data?</h4>
+                <p>While comprehensive, the AOI dataset focuses on large employers (1,763 companies) and may not fully represent opportunities at smaller firms or in emerging industries. The data is based on observed career histories and may not capture informal learning, non-linear pathways, or qualitative aspects of job quality like workplace culture. Additionally, the dataset relies on historical outcomes which may not fully predict future trends, especially as AI reshapes the labor market.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I combine AOI data with other datasets?</h4>
+                <p>Yes! Teams are encouraged to combine AOI data with complementary datasets to create richer, more contextual career navigation tools. This might include labor market data, educational program information, skills taxonomies, or local economic indicators. However, please ensure all external data sources are properly cited and comply with applicable data use agreements and privacy requirements.</p>
+            </div>
+        </div>
     </section>
 
     <!-- Section 5: The Agenda -->
@@ -1207,103 +1324,37 @@
 
     <!-- Section 6: Participants/Partners -->
     <section id="participants" class="section container">
-        <h2>Participants/Partners</h2>
-        <div class="partners-logo-grid">
-            <div class="partner-logo-card">
-                <img src="logos/ascendium.png" alt="Ascendium" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Ascendium</div>
-                <div class="partner-name">Ascendium</div>
+        <h2 style="text-align: center;">Hosts and Partners</h2>
+        <div class="hosts-logo-container">
+            <div class="host-logo">
+                <img src="GF PRIMARY WEATHERED SLATE LOGO.png" alt="Gates Foundation">
             </div>
-            <div class="partner-logo-card">
-                <img src="logos/asu-online.png" alt="ASU Online" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">ASU Online</div>
-                <div class="partner-name">ASU Online</div>
+            <div class="host-logo">
+                <img src="SFF_logo.png" alt="Schultz Family Foundation" style="max-height: 150px;">
             </div>
-            <div class="partner-logo-card">
-                <img src="logos/ballmer-group.png" alt="Ballmer Group" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Ballmer Group</div>
-                <div class="partner-name">Ballmer Group</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/basta.png" alt="Basta" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Basta</div>
-                <div class="partner-name">Basta</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/boeing.png" alt="Boeing" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Boeing</div>
-                <div class="partner-name">Boeing</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/britebound-asa.png" alt="Britebound (ASA)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Britebound</div>
-                <div class="partner-name">Britebound (ASA)</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/burning-glass-institute.png" alt="Burning Glass Institute" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">BGI</div>
-                <div class="partner-name">Burning Glass Institute</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/campusevolve.png" alt="CampusEvolve" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">CampusEvolve</div>
-                <div class="partner-name">CampusEvolve</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/careervillage.png" alt="CareerVillage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">CareerVillage</div>
-                <div class="partner-name">CareerVillage</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/climb-together.png" alt="Climb Together" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Climb Together</div>
-                <div class="partner-name">Climb Together</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/gates-foundation.png" alt="Gates Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Gates</div>
-                <div class="partner-name">Gates Foundation</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/gitlab-foundation.png" alt="GitLab Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">GitLab</div>
-                <div class="partner-name">GitLab Foundation</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/hack-club.png" alt="Hack Club" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Hack Club</div>
-                <div class="partner-name">Hack Club</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/intentional-futures.png" alt="Intentional Futures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Intentional Futures</div>
-                <div class="partner-name">Intentional Futures</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/murdock-trust.png" alt="Murdock Charitable Trust" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Murdock Trust</div>
-                <div class="partner-name">Murdock Charitable Trust</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/nextladder-ventures.png" alt="NextLadder Ventures" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">NextLadder</div>
-                <div class="partner-name">NextLadder Ventures</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/schultz-family-foundation.png" alt="Schultz Family Foundation" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Schultz Foundation</div>
-                <div class="partner-name">Schultz Family Foundation</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/skillup-coalition.png" alt="SkillUp Coalition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">SkillUp</div>
-                <div class="partner-name">SkillUp Coalition</div>
-            </div>
-            <div class="partner-logo-card">
-                <img src="logos/unquantifiable.png" alt="The Unquantifiable" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none;">Unquantifiable</div>
-                <div class="partner-name">The Unquantifiable</div>
-            </div>
+        </div>
+
+        <h3 style="margin-top: 3rem; margin-bottom: 2rem; color: #2c3e50; text-align: center; font-size: 1.5rem; font-weight: 600;">Other Partners</h3>
+        <div class="partners-list">
+            <div class="partner-name-item">Ascendium</div>
+            <div class="partner-name-item">ASU Online</div>
+            <div class="partner-name-item">Ballmer Group</div>
+            <div class="partner-name-item">Basta</div>
+            <div class="partner-name-item">Boeing</div>
+            <div class="partner-name-item">Britebound (ASA)</div>
+            <div class="partner-name-item">Burning Glass Institute</div>
+            <div class="partner-name-item">CampusEvolve</div>
+            <div class="partner-name-item">CareerVillage</div>
+            <div class="partner-name-item">Climb Together</div>
+            <div class="partner-name-item">GitLab Foundation</div>
+            <div class="partner-name-item">Hack Club</div>
+            <div class="partner-name-item">Intentional Futures</div>
+            <div class="partner-name-item">Microsoft</div>
+            <div class="partner-name-item">Murdock Charitable Trust</div>
+            <div class="partner-name-item">NextLadder Ventures</div>
+            <div class="partner-name-item">SkillUp Coalition</div>
+            <div class="partner-name-item">The Unquantifiable</div>
+            <div class="partner-name-item">Washington State Opportunity Scholarship</div>
         </div>
     </section>
 
@@ -1345,7 +1396,7 @@
         <div class="use-cases">
             <div class="use-case-card">
                 <h4>Step 1: Create Repository</h4>
-                <p>Create a new GitHub repository with a clear name (e.g., "team-name-aoi-datathon-2024").</p>
+                <p>Create a new GitHub repository with a clear name (e.g., "team-name-aoi-datathon-2026").</p>
                 <ul style="margin-left: 1rem; margin-top: 0.75rem;">
                     <li>Go to <a href="https://github.com" target="_blank" style="color: #667eea;">github.com</a></li>
                     <li>Click "New repository"</li>
@@ -1458,46 +1509,17 @@ your-repository-name/
     <!-- Project Showcase Section -->
     <section id="showcase" class="section container">
         <h2>Project Showcase</h2>
-        <p>Explore the innovative projects developed during the datathon. Each team has created AI-enabled career navigation tools using the American Opportunity Index dataset.</p>
-        
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <div class="team-name">Team Project Placeholder</div>
-                <h4>Project Title</h4>
-                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" class="project-link">GitHub Repository →</a>
-                </div>
-            </div>
-            
-            <div class="showcase-card">
-                <div class="team-name">Team Project Placeholder</div>
-                <h4>Project Title</h4>
-                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" class="project-link">GitHub Repository →</a>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="team-name">Team Project Placeholder</div>
-                <h4>Project Title</h4>
-                <p>Project description will appear here. Teams can showcase their AI-enabled career navigation solutions, highlighting key features, use cases, and impact.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" class="project-link">GitHub Repository →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="showcase-placeholder">
-            <p>More projects will be added after the datathon presentations. Teams can submit their project details and links through the submission portal.</p>
+        <div style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border-radius: 12px; margin-top: 2rem;">
+            <p style="font-size: 1.15rem; color: #2c3e50; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+                Following the datathon, we will create a public showcase featuring all projects developed during the event. This gallery will highlight the innovative AI-enabled career navigation tools built by our talented participants using the American Opportunity Index dataset.
+            </p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 AI-Enabled Career Navigation Datathon. Hosted by Gates Foundation & Schultz Family Foundation.</p>
+            <p>&copy; 2026 AI-Enabled Career Navigation Datathon. Hosted by Gates Foundation & Schultz Family Foundation.</p>
             <p style="margin-top: 1rem;">
                 <a href="https://docs.google.com/document/d/17fU8pi_tLbFmZTBD8AEcQYKJ8hDksT7j7dxUAsPo4sg/edit?tab=t.0" target="_blank">View Full Participant Packet Document</a>
             </p>
